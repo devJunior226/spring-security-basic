@@ -17,4 +17,9 @@ public class DemoController {
     public String demo() {
         return "Hello Spring Security !";
     }
+
+    @GetMapping("/bye")
+    public String bye() {
+        return "Bye Spring Security !";
+    }
 }
