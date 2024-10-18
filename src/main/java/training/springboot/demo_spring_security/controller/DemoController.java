@@ -13,14 +13,22 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api")
 public class DemoController {
 
+    /**
+     * Anyone can access this endpoint.
+     * @return String
+     */
     @GetMapping("/hello")
     public String demo() {
         return "Hello Spring Security !";
     }
 
-    @GetMapping("/bye")
-    public String bye() {
-        return "Bye Spring Security !";
+    /**
+     * Only public can access this endpoint.
+     * @return String
+     */
+    @GetMapping("/public")
+    public String publicEndpoint() {
+        return "Public Spring Security !";
     }
 
     /**
@@ -33,7 +41,7 @@ public class DemoController {
     }
 
     /**
-     * Only user and admin can access this endpoint.
+     * Only user can access this endpoint.
      * @return String
      */
     @GetMapping("/user")
@@ -42,11 +50,11 @@ public class DemoController {
     }
 
     /**
-     * Anyone can access this endpoint.
+     * Only authenticated can access this endpoint.
      * @return String
      */
-    @GetMapping("/public")
-    public String publicEndpoint() {
-        return "Public Spring Security !";
+    @GetMapping("/protected")
+    public String bye() {
+        return "Bye Spring Security !";
     }
 }

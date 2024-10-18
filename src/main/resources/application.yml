@@ -1,6 +1,6 @@
 ## Personalize our default password
-spring:
-  security:
-    user:
-      name: devJunior
-      password: devJunior
+#spring:
+#  security:
+#    user:
+#      name: devJunior
+#      password: devJunior

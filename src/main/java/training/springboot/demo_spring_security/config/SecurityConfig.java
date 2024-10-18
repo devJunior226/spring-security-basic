@@ -32,10 +32,12 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests(
-                        auth -> auth
-                                .requestMatchers("/api/hello").authenticated()
-                                .anyRequest().permitAll()
+        http.authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/api/protected").hasAnyRole("USER", "ADMIN")
+                        .requestMatchers("/api/admin").hasRole("ADMIN")
+                        .requestMatchers("/api/user").hasRole("USER")
+                        .requestMatchers("/api/public").permitAll()
+                        .anyRequest().authenticated()
                 )
                 .httpBasic();
         return http.build();
@@ -60,14 +62,15 @@ public class SecurityConfig {
     public InMemoryUserDetailsManager userDetailsService() {
         UserDetails user = User.builder()
                 .username("user")
-                .password("user")
-                .roles("ROLE_USER")
+                //.password("user") Ca ne passera pas car il faut encoder le password.
+                .password(passwordEncoder().encode("user"))
+                .roles("USER")
                 .build();
 
         UserDetails admin = User.builder()
                 .username("admin")
-                .password("admin")
-                .roles("ROLE_ADMIN")
+                .password(passwordEncoder().encode("admin"))
+                .roles("ADMIN")
                 .build();
 
         return new InMemoryUserDetailsManager(user, admin);
@@ -90,23 +93,3 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
