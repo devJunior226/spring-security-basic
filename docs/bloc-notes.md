@@ -7,3 +7,5 @@
 - Le UserDetailsService est toujour associé à un `PasswordEncoder` pour crypter le mot de passe de l'utilisateur.
 - Le UserDetailsService a une seule responsabilité, c'est retrouver l'utilisateur qui dans la bd par son username,
     son email, ou son code.
+
+Une fois que tout cela fait, il faut redefinir la logique d'accès aux différents endpoints,

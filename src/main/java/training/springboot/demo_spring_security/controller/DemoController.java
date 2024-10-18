@@ -22,4 +22,31 @@ public class DemoController {
     public String bye() {
         return "Bye Spring Security !";
     }
+
+    /**
+     * Only admin can access this endpoint.
+     * @return String
+     */
+    @GetMapping("/admin")
+    public String admin() {
+        return "Admin Spring Security !";
+    }
+
+    /**
+     * Only user and admin can access this endpoint.
+     * @return String
+     */
+    @GetMapping("/user")
+    public String user() {
+        return "User Spring Security !";
+    }
+
+    /**
+     * Anyone can access this endpoint.
+     * @return String
+     */
+    @GetMapping("/public")
+    public String publicEndpoint() {
+        return "Public Spring Security !";
+    }
 }
